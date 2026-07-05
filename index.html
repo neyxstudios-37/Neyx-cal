@@ -1,247 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Smart Calculator</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nec MLC Calculator</title>
 <style>
-  body {
-    margin: 0;
-    font-family: Arial;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-
-  .calculator {
-    width: 340px;
-    background: #0a0a0a;
-    padding: 20px;
-    border-radius: 20px;
-    border: 1px solid #222;
-    box-shadow: 0 0 20px rgba(255,255,255,0.08);
-  }
-
-  .top-bar {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
-
-  .display {
-    height: 70px;
-    background: #111;
-    color: #fff;
-    font-size: 28px;
-    text-align: right;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #222;
-    overflow-x: auto;
-  }
-
-  select, button {
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-  }
-
-  select {
-    flex: 1;
-    background: #1a1a1a;
-    color: white;
-  }
-
-  .mic {
-    background: #10b981;
-    color: black;
-    font-weight: bold;
-  }
-
-  .settings {
-    background: #2563eb;
-    color: white;
-  }
-
-  .buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-top: 10px;
-  }
-
-  button.calc {
-    padding: 16px;
-    font-size: 18px;
-    border-radius: 12px;
-    background: #1a1a1a;
-    color: white;
-    border: none;
-  }
-
-  .operator { background: #2563eb; }
-  .clear { background: #dc2626; }
-  .equal { background: #f59e0b; color: black; grid-column: span 2; }
-
-  /* SETTINGS PANEL */
-  .panel {
-    display: none;
-    margin-top: 10px;
-    background: #111;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #333;
-  }
-
-  .panel label {
-    color: white;
-    font-size: 12px;
-  }
-
-  .panel select {
-    width: 100%;
-    margin: 5px 0;
-  }
+body{margin:0;font-family:Arial;background:#0a0a0a;color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.container{text-align:center;padding:20px}
+img{max-width:90%;border-radius:15px;margin-bottom:20px;box-shadow:0 0 30px #00ff88}
+h1{color:#00ff88;margin-bottom:10px}
+p{color:#aaa}
+.input-box{margin:20px 0}
+input{padding:12px;border-radius:8px;border:2px solid #00ff88;background:#1a1a1a;color:#fff;width:200px;text-align:center;font-size:18px}
+button{padding:12px 25px;background:#00ff88;color:#000;border:none;border-radius:8px;font-weight:bold;font-size:16px;margin-top:10px;cursor:pointer}
+.result{margin-top:20px;font-size:20px;color:#00ff88}
 </style>
 </head>
-
 <body>
-
-<div class="calculator">
-
-  <div id="display" class="display">0</div>
-
-  <div class="top-bar">
-    <button class="settings" onclick="toggleSettings()">⚙️</button>
-
-    <select id="language">
-      <option value="en-US">English</option>
-      <option value="fr-FR">French</option>
-      <option value="es-ES">Spanish</option>
-      <option value="sw-KE">Swahili</option>
-    </select>
-
-    <button class="mic" onclick="startVoice()">🎤</button>
-  </div>
-
-  <!-- SETTINGS PANEL -->
-  <div id="panel" class="panel">
-
-    <label>Theme</label>
-    <select id="theme" onchange="changeTheme()">
-      <option value="black">Black</option>
-      <option value="gray">Dark Gray</option>
-    </select>
-
-    <label>Voice</label>
-    <select id="voiceMode" onchange="saveSettings()">
-      <option value="on">ON</option>
-      <option value="off">OFF</option>
-    </select>
-
-  </div>
-
-  <div class="buttons">
-    <button class="calc clear" onclick="clearDisplay()">C</button>
-    <button class="calc" onclick="deleteLast()">DEL</button>
-    <button class="calc operator" onclick="append('/')">/</button>
-    <button class="calc operator" onclick="append('*')">*</button>
-
-    <button class="calc" onclick="append('7')">7</button>
-    <button class="calc" onclick="append('8')">8</button>
-    <button class="calc" onclick="append('9')">9</button>
-    <button class="calc operator" onclick="append('-')">-</button>
-
-    <button class="calc" onclick="append('4')">4</button>
-    <button class="calc" onclick="append('5')">5</button>
-    <button class="calc" onclick="append('6')">6</button>
-    <button class="calc operator" onclick="append('+')">+</button>
-
-    <button class="calc" onclick="append('1')">1</button>
-    <button class="calc" onclick="append('2')">2</button>
-    <button class="calc" onclick="append('3')">3</button>
-    <button class="calc equal" onclick="calculate()">=</button>
-
-    <button class="calc" onclick="append('0')">0</button>
-    <button class="calc" onclick="append('.')">.</button>
-  </div>
+<div class="container">
+<img src="file_00000000d4e871f4b1b23451b1258c17.png" alt="Nec MLC">
+<h1>Nec MLC Calculator</h1>
+<p>Enter your value below</p>
+<div class="input-box">
+<input type="number" id="num" placeholder="Enter number">
+<br>
+<button onclick="calc()">Calculate</button>
 </div>
-
+<div class="result" id="result"></div>
+</div>
 <script>
-  let display = document.getElementById("display");
-
-  function append(v){
-    display.innerText = display.innerText === "0" ? v : display.innerText + v;
-  }
-
-  function clearDisplay(){ display.innerText = "0"; }
-
-  function deleteLast(){
-    display.innerText = display.innerText.length <= 1 ? "0" : display.innerText.slice(0,-1);
-  }
-
-  function calculate(){
-    try { display.innerText = eval(display.innerText); }
-    catch { display.innerText = "Error"; }
-  }
-
-  function toggleSettings(){
-    let p = document.getElementById("panel");
-    p.style.display = p.style.display === "block" ? "none" : "block";
-  }
-
-  function changeTheme(){
-    let theme = document.getElementById("theme").value;
-    document.body.style.background = theme === "black" ? "#000" : "#111";
-    localStorage.setItem("theme", theme);
-  }
-
-  function saveSettings(){
-    localStorage.setItem("voice", document.getElementById("voiceMode").value);
-    localStorage.setItem("language", document.getElementById("language").value);
-  }
-
-  function startVoice(){
-    if(localStorage.getItem("voice") === "off") return;
-
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if(!SpeechRecognition){ alert("Not supported"); return; }
-
-    const rec = new SpeechRecognition();
-    rec.lang = document.getElementById("language").value;
-
-    rec.onresult = e=>{
-      let text = e.results[0][0].transcript.toLowerCase()
-        .replace(/plus/g,"+")
-        .replace(/minus/g,"-")
-        .replace(/times/g,"*")
-        .replace(/divide by/g,"/");
-
-      display.innerText = display.innerText==="0"?text:display.innerText+text;
-    };
-
-    rec.start();
-  }
-
-  // Load saved settings
-  window.onload = ()=>{
-    let theme = localStorage.getItem("theme");
-    if(theme) document.getElementById("theme").value = theme;
-
-    let voice = localStorage.getItem("voice");
-    if(voice) document.getElementById("voiceMode").value = voice;
-
-    let lang = localStorage.getItem("language");
-    if(lang) document.getElementById("language").value = lang;
-
-    changeTheme();
-  };
+function calc(){
+let n=document.getElementById('num').value;
+let res=n*1.5+100;
+document.getElementById('result').innerHTML='Result: '+res;
+}
 </script>
-
 </body>
 </html>
